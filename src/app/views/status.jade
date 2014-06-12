@@ -1,0 +1,23 @@
+doctype html(lang="de")
+
+html
+  head
+    title Status
+    script(src="/js/jquery-1.11.1.js")
+
+  body
+    h1 Status
+
+    div
+      each roomname, i in allrooms
+        div
+          h1 Raum #{roomname}
+          ul
+          each state, i in allstate
+            if state.room === roomname
+              li
+                span( class='#{state.line}' ) #{state.line}
+                = ' '
+                span#info #{state.name} [-#{state.number}]
+
+

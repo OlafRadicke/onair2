@@ -5,7 +5,8 @@
         "cookie-parser": ">=1.1.x",
         "cookie-session": ">=1.0.2",
         "jade": ">=0.30.x",
-        "websocket": " >=1.0.x"
+        "websocket": ">=1.0.x",
+        "socket.io": "1.0.x"
 
     }
 }

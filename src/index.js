@@ -1,55 +1,57 @@
 
 var express = require('express');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser')
-var session = require('cookie-session')
-
 var app =  express();
+
 
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
+// switch on newlines in Jade
+app.locals.pretty = true;
 
-// Login middleware
-app.use( bodyParser() );
-app.use(session({
-  keys: ['key1', 'key2']
-}));
+app.use('/js', express.static(__dirname + '/js'));
 
-function checkAuth(req, res, next) {
-  if(!req.session.user) {
-    res.redirect('/');
-  } else {
-    next();
+
+// Dummy data
+var allrooms = ['Support', 'Vertrieb', 'Engineering'];
+var allstate = [
+  {
+    "name": "Hugo",
+    "room": "Support",
+    "line": "ON AIR",
+    "number": "155"
+  },
+  {
+    "name": "Petra",
+    "room": "Vertrieb",
+    "line": "OFF AIR",
+    "number": "166"
+  },
+  {
+    "name": "Ingo",
+    "room": "Support",
+    "line": "OFF AIR",
+    "number": "343"
+  },
+  {
+    "name": "Thomas",
+    "room": "Engineering",
+    "line": "ON AIR",
+    "number": "155"
   }
-}
+];
 
-// Routes
+console.log(allstate);
+console.log(allrooms);
+
+// ######### Routes ################
 app.get( '/',  function (req, res) {
-    res.render('login');
+    res.render('status', { allrooms: allrooms, allstate: allstate });
   }
 )
 
-app.post('/login', function (req, res) {
-  var user = req.body.username,
-    pw = req.body.password;
-
-  if ( user === 'u1' && pw === 'test' ) {
-    req.session.user = 'u1';
-  } else if ( user === 'u2' && pw === 'test' ) {
-    req.session.user = 'u12';
-  };
-
-  res.redirect('/chat');
-});
-
-app.get( '/chat', checkAuth, function (req, res) {
-  res.render('chat', {user: req.session.user});
-});
-
-app.get( '/logout', function (req, res) {
-  delete req.session.user;
-  res.redirect('/');
-
-});
 
 app.listen(8080);
+console.log('App started on port %d', 8080);
+
+
+
