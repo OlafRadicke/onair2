@@ -1,5 +1,6 @@
 
 var exec = require('child_process').exec;
+var fs = require('fs');
 
 //  execute commands
 function execute(command, callback){
@@ -10,147 +11,25 @@ function execute(command, callback){
 
 function OnAir2( initTimeStamp ) {
   this.lastupdate = initTimeStamp;
-  console.log("init classe with time stamp:");
-  console.log(this.lastupdate);
+  this.statusFile = __dirname + '/models/status.json';
 
-// Dummy data
-  this.allrooms = ['Besprechungsraum', 'Consulting', 'Vertrieb', 'Engineering', 'Support'];
-  this.allstate = [
-    {
-      "name": "Unbekannt",
-      "starfacecode": "besprechungsraum",
-      "room": "Besprechungsraum",
-      "line": "ON AIR",
-      "number": ""
-    },
-    {
-      "name": "Michael",
-      "starfacecode": "SIP/1051.tiptel286",
-      "room": "Consulting",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Peter",
-      "starfacecode": "SIP/peter",
-      "room": "Consulting",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Patrick",
-      "starfacecode": "SIP/nina",
-      "room": "Consulting",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Mark",
-      "starfacecode": "SIP/Gigaset3",
-      "room": "Consulting",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Klaas",
-      "starfacecode": "SIP/1241",
-      "room": "Consulting",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Dominic",
-      "starfacecode": "SIP/ducpham",
-      "room": "Consulting",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Holger",
-      "starfacecode": "SIP/neubauer",
-      "room": "Engineering",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Florian",
-      "starfacecode": "SIP/1050.tiptel286",
-      "room": "Engineering",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Philipp",
-      "starfacecode": "SIP/philipp",
-      "room": "Engineering",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Thomas",
-      "starfacecode": "SIP/1240",
-      "room": "Support",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Olaf",
-      "starfacecode": "SIP/olaf",
-      "room": "Support",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Pascal",
-      "starfacecode": "SIP/pascal",
-      "room": "Support",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Tobias",
-      "starfacecode": "SIP/tobias",
-      "room": "Support",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Jan",
-      "starfacecode": "SIP/Gigaset4",
-      "room": "Vertrieb",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "",
-      "starfacecode": "",
-      "room": "Vertrieb",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Ingrid",
-      "starfacecode": "SIP/ingrid",
-      "room": "Vertrieb",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Julie",
-      "starfacecode": "SIP/julian",
-      "room": "Vertrieb",
-      "line": "OFF AIR",
-      "number": ""
-    },
-    {
-      "name": "Stefan",
-      "starfacecode": "SIP/stefan",
-      "room": "Vertrieb",
-      "line": "OFF AIR",
-      "number": ""
+  fs.readFile(this.statusFile, 'utf8', function (err, allstate) {
+    if (err) {
+      console.log('Error: ' + err);
+      return;
     }
-  ];
+
+    this.allstate = JSON.parse(allstate);
+
+    console.dir("this.allstate:");
+    console.dir(this.allstate);
+    console.dir("this.allstate.room['Consulting'][1].name:");
+    console.dir(this.allstate.room["Consulting"][1].name);
+  });
+
 }
+
+
 
 
 OnAir2.prototype.getTimeStamp  = function () {
@@ -158,8 +37,9 @@ OnAir2.prototype.getTimeStamp  = function () {
 }
 
 OnAir2.prototype.getStatus = function (req, res) {
-  "use strict";
-  var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1";
+//   var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1";
+  // test
+  var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
 
   var now_checktime = new Date().getTime();
   console.log("[001] check time stamps:");
@@ -174,21 +54,26 @@ OnAir2.prototype.getStatus = function (req, res) {
   }
   console.log(this.lastupdate);
   console.log(now_checktime);
+
+
   execute(asterisk_command, function(activ_lines){
       console.log( activ_lines );
       var activ_lines_list = activ_lines.split("\n");
       for (index = 0; index < activ_lines_list.length; ++index) {
-        for (index2 = 0; index2 < this.allrooms.length; ++index2) {
-           if (activ_lines_list[index] === this.allrooms[index2].starfacecode) {
-             this.allrooms[index2].line = "ON AIR";
-           } else {
-             this.allrooms[index2].line = "OFF AIR";
-           }
+//         for (index2 = 0; index2 < this.allstate.room.length; ++index2) {
+        for(var room in this.allstate.room ) {
+          for(var person in room ) {
+             if (activ_lines_list[index] === person.starfacecode) {
+               person.line = "ON AIR";
+             } else {
+               person.line = "OFF AIR";
+             }
+          }
         }
       }
   });
 
-  res.render('status', { allrooms: this.allrooms, allstate: this.allrooms });
+  res.render('status', { allstate: this.allstate });
 }
 
 

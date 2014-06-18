@@ -11,11 +11,12 @@ app.locals.pretty = true;
 
 app.use('/js', express.static(__dirname + '/js'));
 
+// ############# tests ##########################
 
 
-console.log("check time stamp member:");
-console.log(onair2.getTimeStamp());
-console.log(onair2.getStatus);
+
+
+
 
 // ######### Routes ################
 app.get( '/',  onair2.getStatus.bind(onair2) ) ;
