@@ -5,13 +5,18 @@ html
     title Status
     script(src="/js/jquery-1.11.1.js")
 
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/bootstrap/js/bootstrap.min.js')
+
   body
     h1 Status
 
     div
       each room, index in allstate.room
         div
-          h1 Raum #{room}
+          h1 Raum #{index}
           ul
           each person, i in room
             li

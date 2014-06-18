@@ -6,7 +6,7 @@
         "cookie-session": ">=1.0.2",
         "jade": ">=0.30.x",
         "websocket": ">=1.0.x",
-        "socket.io": "1.0.x"
-
+        "socket.io": "1.0.x",
+        "exec-sync": "0.1.x"
     }
 }

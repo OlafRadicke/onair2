@@ -1,24 +1,12 @@
 
-var exec = require('child_process').exec;
+var execSync = require('exec-sync');
 var fs = require('fs');
-
-//  execute commands
-function execute(command, callback){
-    exec(command, function(error, stdout, stderr){ callback(stdout); });
-};
-
-
 
 function OnAir2( initTimeStamp ) {
   this.lastupdate = initTimeStamp;
   this.statusFile = __dirname + '/models/status.json';
   var stringState = fs.readFileSync(this.statusFile,'utf8');
   this.allstate = JSON.parse(stringState);
-
-  console.dir("this.allstate:");
-  console.dir(this.allstate);
-  console.dir("this.allstate.room['Consulting'][1].name:");
-  console.dir(this.allstate.room["Consulting"][1].name);
 }
 
 OnAir2.prototype.getTimeStamp = function () {
@@ -29,15 +17,7 @@ OnAir2.prototype.getStatus = function (req, res) {
 //   var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1";
   // test
   var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
-
   var now_checktime = new Date().getTime();
-
-  // tests
-  console.log("[001] check time stamps:");
-  console.log(this.lastupdate);
-  console.log(now_checktime);
-  console.dir("this.allstate.room['Consulting'][1].name:");
-  console.dir(this.allstate.room["Consulting"][1].name);
 
   if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > 60 ) {
     this.lastupdate = now_checktime;
@@ -49,31 +29,27 @@ OnAir2.prototype.getStatus = function (req, res) {
   console.log(this.lastupdate);
   console.log(now_checktime);
 
-
-  execute(asterisk_command, function(activ_lines){
-      console.log( activ_lines );
-      var activ_lines_list = activ_lines.split("\n");
-      for (index = 0; index < activ_lines_list.length; ++index) {
-//         for (index2 = 0; index2 < this.allstate.room.length; ++index2) {
-        for(var room in this.allstate.room ) {
-          for(var person in room ) {
-             if (activ_lines_list[index] === person.starfacecode) {
-               person.line = "ON AIR";
-             } else {
-               person.line = "OFF AIR";
-             }
-          }
+  var activ_lines = execSync(asterisk_command);
+  console.log( "activ_lines:" + activ_lines);
+  var activ_lines_list = activ_lines.split("\n");
+  console.log("activ_lines_list: " + activ_lines_list);
+  for(var roomIndex in this.allstate.room ) {
+    for(var person in this.allstate.room[roomIndex] ) {
+      for( var phonCode in activ_lines_list) {
+        if( activ_lines_list[phonCode] === this.allstate.room[roomIndex][person].starfacecode ) {
+          this.allstate.room[roomIndex][person].line = "ON AIR";
+          break;
+        } else {
+          this.allstate.room[roomIndex][person].line = "OFF AIR";
         }
       }
-  });
+    }
+  }
 
-  console.dir("this.allstate.room['Consulting'][1].name:");
-  console.dir(this.allstate.room["Consulting"][1].name);
+//   console.log("JSON.stringify(this.allstate):" + JSON.stringify(this.allstate));
   res.render('status', {allstate: this.allstate} );
 }
 
 
 var onair2 = new OnAir2( new Date().getTime() );
-console.log("check time stamp member:");
-console.log(onair2.getTimeStamp());
 module.exports = onair2;
