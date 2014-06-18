@@ -12,27 +12,16 @@ function execute(command, callback){
 function OnAir2( initTimeStamp ) {
   this.lastupdate = initTimeStamp;
   this.statusFile = __dirname + '/models/status.json';
+  var stringState = fs.readFileSync(this.statusFile,'utf8');
+  this.allstate = JSON.parse(stringState);
 
-  fs.readFile(this.statusFile, 'utf8', function (err, allstate) {
-    if (err) {
-      console.log('Error: ' + err);
-      return;
-    }
-
-    this.allstate = JSON.parse(allstate);
-
-    console.dir("this.allstate:");
-    console.dir(this.allstate);
-    console.dir("this.allstate.room['Consulting'][1].name:");
-    console.dir(this.allstate.room["Consulting"][1].name);
-  });
-
+  console.dir("this.allstate:");
+  console.dir(this.allstate);
+  console.dir("this.allstate.room['Consulting'][1].name:");
+  console.dir(this.allstate.room["Consulting"][1].name);
 }
 
-
-
-
-OnAir2.prototype.getTimeStamp  = function () {
+OnAir2.prototype.getTimeStamp = function () {
   return this.lastupdate
 }
 
@@ -42,9 +31,14 @@ OnAir2.prototype.getStatus = function (req, res) {
   var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
 
   var now_checktime = new Date().getTime();
+
+  // tests
   console.log("[001] check time stamps:");
   console.log(this.lastupdate);
   console.log(now_checktime);
+  console.dir("this.allstate.room['Consulting'][1].name:");
+  console.dir(this.allstate.room["Consulting"][1].name);
+
   if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > 60 ) {
     this.lastupdate = now_checktime;
     console.log("update timestamp...");
@@ -73,7 +67,9 @@ OnAir2.prototype.getStatus = function (req, res) {
       }
   });
 
-  res.render('status', { allstate: this.allstate });
+  console.dir("this.allstate.room['Consulting'][1].name:");
+  console.dir(this.allstate.room["Consulting"][1].name);
+  res.render('status', {allstate: this.allstate} );
 }
 
 
