@@ -9,8 +9,8 @@ app.set('view engine', 'jade');
 // switch on newlines in Jade
 app.locals.pretty = true;
 
-app.use('public/javascripts/', express.static(__dirname + 'public/javascripts/'));
-app.use('bootstrap/', express.static(__dirname + 'bootstrap/'));
+app.use('/javascripts', express.static(__dirname + '/public/javascripts'));
+app.use('/bootstrap', express.static(__dirname + '/public/bootstrap'));
 
 // ######### Routes ################
 app.get( '/',  onair2.getStatus.bind(onair2) ) ;

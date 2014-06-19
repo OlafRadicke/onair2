@@ -3,25 +3,25 @@ doctype html(lang="de")
 html
   head
     title Status
-    script(src="/js/jquery-1.11.1.js")
+    //- script(src="/js/jquery-1.11.1.js")
 
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', type="text/css", href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', type="text/css", href='/bootstrap/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', type="text/css", href='/stylesheets/style.css')
     script(src='/bootstrap/js/bootstrap.min.js')
 
   body
     h1 Status
 
-    div
+    div(class="row")
       each room, index in allstate.room
-        div
-          h1 Raum #{index}
-          ul
+        div(class="span5")
+          h3 #{index}
+
           each person, i in room
-            li
-              span( class='#{person.line}' ) #{person.line}
-              = ' '
-              span#info #{person.name} [-#{person.number}]
+            div(class="row")
+              div(class="span1")
+                span( class='#{person.line}' ) #{person.line}
+              div(class="span1") #{person.name} [-#{person.number}]
 
 
