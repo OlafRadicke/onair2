@@ -1,0 +1,63 @@
+
+body {
+/*     text-align: center; */
+    color:#00264d;
+    font-family: 'Futura STD light';
+}
+
+div#title_image {
+  align:center;
+  text-align:center;
+
+  background-image:url(../images/atix.png);
+  margin:0px;
+  padding:160px 0px 0px 160px;
+  background-repeat:no-repeat;
+  background-position: center;
+  height: 80;
+}
+
+span#title_string{
+  align:center;
+  text-align:center;
+  padding:5px;
+
+  font-weight: bold;
+  font-size: 120%;
+  background-color:red;
+  color:white;
+  text-shadow:2px 2px 2px  white;
+  text-shadow: 0px 0px 10px white, -1px -1px white;
+
+  width: 200px;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+
+  border: 1px solid black;
+  -webkit-appearance: none;
+}
+
+div#content{
+  padding: 50px;
+  align:center;
+}
+
+div.span5 {
+    border: 1px solid black;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+/*    align: left;
+    text-align:  left;
+
+    break-inside: avoid-column;
+    break-inside: avoid;*/
+
+    margin: 5px;
+    padding: 5px;
+
+}

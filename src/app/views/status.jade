@@ -11,17 +11,19 @@ html
     script(src='/bootstrap/js/bootstrap.min.js')
 
   body
-    h1 Status
+    div#title_image
+      span#title_string OnAir2
 
-    div(class="row")
-      each room, index in allstate.room
-        div(class="span5")
-          h3 #{index}
+    div#content
+      div(class="row")
+        each room, index in allstate.room
+          div(class="span5")#innerbox
+            h3 #{index}
 
-          each person, i in room
-            div(class="row")
-              div(class="span1")
-                span( class='#{person.line}' ) #{person.line}
-              div(class="span1") #{person.name} [-#{person.number}]
+            each person, i in room
+              div(class="row")
+                div(class="span2")
+                  span( class='#{person.line}' ) #{person.line}
+                div(class="span2") #{person.name} [-#{person.number}]
 
 

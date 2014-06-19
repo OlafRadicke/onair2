@@ -11,6 +11,8 @@ app.locals.pretty = true;
 
 app.use('/javascripts', express.static(__dirname + '/public/javascripts'));
 app.use('/bootstrap', express.static(__dirname + '/public/bootstrap'));
+app.use('/images', express.static(__dirname + '/public/images'));
+app.use('/stylesheets', express.static(__dirname + '/public/stylesheets'));
 
 // ######### Routes ################
 app.get( '/',  onair2.getStatus.bind(onair2) ) ;
