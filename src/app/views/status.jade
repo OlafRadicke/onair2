@@ -10,11 +10,16 @@ html
     link(rel='stylesheet', type="text/css", href='/stylesheets/style.css')
     script(src='/bootstrap/js/bootstrap.min.js')
 
+    script(type='text/javascript').
+      setTimeout(function(){
+         window.location.reload(1);
+      }, 5000);
+
   body
     div#title_image
       span#title_string OnAir2
 
-    div#content
+    div#im-centered
       div(class="row")
         each room, index in allstate.room
           div(class="span5")#innerbox
@@ -23,7 +28,10 @@ html
             each person, i in room
               div(class="row")
                 div(class="span2")
-                  span( class='#{person.line}' ) #{person.line}
+                  if (person.line == "ON AIR")
+                    span( class='onair' ) ON AIR
+                  else
+                    span( class='offair' ) ON AIR
                 div(class="span2") #{person.name} [-#{person.number}]
 
 
