@@ -13,7 +13,7 @@ html
     script(type='text/javascript').
       setTimeout(function(){
          window.location.reload(1);
-      }, 5000);
+      }, 15000);
 
   body
     div#title_image
@@ -34,4 +34,9 @@ html
                     span( class='offair' ) ON AIR
                 div(class="span2") #{person.name} [-#{person.number}]
 
+  if ( nexttrain > 18 )
+    div#no_sbahn
+        Der nächste Zug fährt erst in #{nexttrain} Min.
+  else
+    div#sbahn Der nächste Zug fährt in #{nexttrain} Min.
 

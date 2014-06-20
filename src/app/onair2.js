@@ -3,17 +3,93 @@ var execSync = require('exec-sync');
 var fs = require('fs');
 var htmlparser = require("htmlparser");
 var http = require('http');
-
+var returnMinits = 99;
 
 function OnAir2( initTimeStamp ) {
   this.lastupdate = initTimeStamp;
   this.statusFile = __dirname + '/models/status.json';
   var stringState = fs.readFileSync(this.statusFile,'utf8');
   this.allstate = JSON.parse(stringState);
+  this.nextTrainMinuts = 0;
+
+  this.getTimeStamp = function () {
+    return this.lastupdate
+  };
 }
 
-OnAir2.prototype.getTimeStamp = function () {
-  return this.lastupdate
+
+OnAir2.prototype.getParsedTime = function (rawHtml) {
+  console.log(  "begin this.nextTrainMinuts: " + this.nextTrainMinuts );
+//   console.log('BODY: ' + rawHtml);
+  var minuts = null;
+  var anyRow = null;
+  var handler = new htmlparser.DefaultHandler(function(err, dom) {
+    if (err) {
+      sys.debug("Error: " + err);
+    } else {
+      var rowEven = htmlparser.DomUtils.getElements({ tag_name: "tr", class: "rowEven" }, dom);
+      var rowOdd = htmlparser.DomUtils.getElements({ tag_name: "tr", class: "rowOdd" }, dom);
+      var rowAll = rowOdd.concat( rowEven );
+      console.log("--->rowAll.length: " + rowAll.length );
+      returnMinits = 999;
+      for (var i = 0; i < rowAll.length; i++) {
+        console.log("Round: " + i);
+//         console.log("---> rowOdd: " + JSON.stringify(rowOdd) );
+        var statonName = rowAll[i]["children"][3]["children"][0]["data"];
+        statonName = statonName.replace(/\t/g, '').replace(/\n/g, '').trim()
+        console.log("--->statonName: " );
+        console.log( statonName );
+        if ( statonName.search("Ostbahnhof") > -1 || statonName.search("Hbf") > -1 ) {
+          console.log( "### INNENSTADT ###" );
+          minuts = rowAll[0]["children"][5]["children"][0]["data"];
+          console.log("---> minuten: " );
+          console.log( minuts );
+          minuts = minuts - 7;
+          console.log( "### UMGERECHNET ###" );
+          console.log( "minuts: " + minuts );
+          console.log(  "this.nextTrainMinuts: " + this.nextTrainMinuts );
+          console.log(  "returnMinits: " + returnMinits );
+//           if ( minuts > 0 && minuts < this.nextTrainMinuts ) {
+          if ( minuts > 0 && minuts < returnMinits ) {
+              console.log( "### SPEICHERE ###" );
+              console.log( "minuts: " + minuts );
+              this.nextTrainMinuts = minuts;
+              returnMinits  = minuts;
+              console.log( "this.nextTrainMinuts: " + this.nextTrainMinuts );
+              console.log( "returnMinits: " + returnMinits );
+          }
+        }
+      }
+    }
+  }, { verbose: false });
+  var parser = new htmlparser.Parser(handler);
+  parser.parseComplete(rawHtml);
+  console.log( "this.nextTrainMinuts: " + this.nextTrainMinuts );
+
+}
+
+OnAir2.prototype.getNextTrain  = function () {
+  // ########## train info #######################
+  var minuts = null;
+  var options = {
+    host: 'www.mvg-live.de',
+    port: 80,
+    path: '/ims/dfiStaticAuswahl.svc?haltestelle=Feldmoching+Bf.&sbahn=checkedm'
+  };
+
+  http.get(options, function(res) {
+//     console.log("Got response: " + res.statusCode);
+    res.on(
+      'data',
+      function (rawHtml) {
+        OnAir2.prototype.getParsedTime(rawHtml);
+//         this.getParsedTime(rawHtml);
+      }
+    );
+
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+  });
 }
 
 OnAir2.prototype.getStatus = function (req, res) {
@@ -21,17 +97,8 @@ OnAir2.prototype.getStatus = function (req, res) {
   // test
   var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
   var now_checktime = new Date().getTime();
+  now_checktime = now_checktime + 1000 * 61
   var timeOut = 60;
-
-  if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
-    this.lastupdate = now_checktime;
-    console.log("update timestamp...");
-  } else {
-    console.log("es sind noch nicht " + timeOut + " Sek. vergangen: ");
-    console.log( Math.round(( now_checktime - this.lastupdate) / 1000 ) );
-  }
-  console.log(this.lastupdate);
-  console.log(now_checktime);
 
 
   if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
@@ -54,55 +121,28 @@ OnAir2.prototype.getStatus = function (req, res) {
   }
 
   // ########## train info #######################
-  var options = {
-    host: 'www.mvg-live.de',
-    port: 80,
-    path: '/ims/dfiStaticAuswahl.svc?haltestelle=Feldmoching+Bf.&sbahn=checkedm'
-  };
-
-  http.get(options, function(res) {
-    console.log("Got response: " + res.statusCode);
-    res.on('data', function (rawHtml) {
-      console.log('BODY: ' + rawHtml);
-
-      var anyRow = null;
-      var handler = new htmlparser.DefaultHandler(function(err, dom) {
-        if (err) {
-          sys.debug("Error: " + err);
-        } else {
-          var rowEven = htmlparser.DomUtils.getElements({ tag_name: "tr", class: "rowEven" }, dom);
-          if ( rowEven != null ) {
-//             console.log("---> rowEven: " + JSON.stringify(rowEven) );
-            var statonName = rowEven[0]["children"][3]["children"][0]["data"];
-            statonName = statonName.replace(/\t/g, '').replace(/\n/g, '')
-            console.log("statonName: " );
-            console.log( statonName );
-            console.log("---> rowEven::minuten: " + JSON.stringify(rowEven[0]["children"][5]["children"][0]["data"] ) );
-          }
-
-          var rowOdd = htmlparser.DomUtils.getElements({ tag_name: "tr", class: "rowOdd" }, dom);
-          if ( rowOdd != null ) {
-//             console.log("---> rowOdd: " + JSON.stringify(rowOdd) );
-            var statonName = rowOdd[0]["children"][3]["children"][0]["data"];
-            statonName = statonName.replace(/\t/g, '').replace(/\n/g, '')
-            console.log("statonName: " );
-            console.log( statonName );
-            console.log("---> rowOdd::minuten: " + JSON.stringify(rowOdd[0]["children"][5]["children"][0]["data"] ) );
-          }
-        }
-      }, { verbose: false });
-      var parser = new htmlparser.Parser(handler);
-      parser.parseComplete(rawHtml);
 
 
-    });
+  if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
+    this.getNextTrain();
+  }
 
-  }).on('error', function(e) {
-    console.log("Got error: " + e.message);
-  });
+  /*! if time out all ready then reset timer. */
+  if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
+    this.lastupdate = now_checktime;
+    console.log("update timestamp...");
+  } else {
+    console.log("es sind noch nicht " + timeOut + " Sek. vergangen: ");
+    console.log( Math.round(( now_checktime - this.lastupdate) / 1000 ) );
+  }
+//   console.log(this.lastupdate);
+//   console.log(now_checktime);
+
+  console.log( "===>> Nähster Zug: "+ this.nextTrainMinuts);
+  console.log( "===>> Nähster Zug: "+ returnMinits);
 
 //   console.log("JSON.stringify(this.allstate):" + JSON.stringify(this.allstate));
-  res.render('status', {allstate: this.allstate} );
+  res.render('status', {allstate: this.allstate, nexttrain: returnMinits } );
 }
 
 

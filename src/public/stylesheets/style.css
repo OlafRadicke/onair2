@@ -7,21 +7,22 @@ body {
 
 div#title_image {
   align:center;
-  text-align:center;
+  text-align: center;
 
   background-image:url(../images/atix.png);
   margin:0px;
-  padding:160px 0px 0px 160px;
+/*   padding:100px 0px 0px 100px; */
   background-repeat:no-repeat;
   background-position: center;
-  height: 80;
+  height: 90;
 }
 
 span#title_string{
   align:center;
   text-align:center;
   padding:5px;
-
+  position: relative;
+  margin: 3000px 0px 0px 200px;
   font-weight: bold;
   font-size: 120%;
   background-color:red;
@@ -130,3 +131,33 @@ span.offair {
   border: 1px solid black;
   -webkit-appearance: none;
 }
+
+div#sbahn {
+  background-color: #00264d;
+  color: white;
+  font-weight: bold;
+  font-size: 200%;
+  align:center;
+  text-align:center;
+  padding:10px;
+  margin: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+div#no_sbahn {
+  background-color: #fe9e02;
+  color: black;
+  text-decoration: blink;
+  font-weight: bold;
+  font-size: 200%;
+  align:center;
+  text-align:center;
+  padding:10px;
+  margin: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
