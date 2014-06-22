@@ -83,28 +83,35 @@ div.span5 {
 }
 
 span.onair {
-  align:center;
-  text-align:center;
+    align:center;
+    text-align:center;
 
-  width: 200px;
-  padding:5px;
-  margin: 5px;
+    width: 200px;
+    padding:5px;
+    margin: 5px;
 
-  font-weight: bold;
-  font-size: 120%;
-  background-color:red;
-  color:white;
-  text-shadow:2px 2px 2px  white;
-  text-shadow: 0px 0px 10px white, -1px -1px white;
+    font-weight: bold;
+    font-size: 120%;
+    background-color:red;
+    color:white;
+    text-shadow:2px 2px 2px  white;
+    text-shadow: 0px 0px 10px white, -1px -1px white;
 
-  width: 200px;
+    width: 200px;
 
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 
-  border: 1px solid black;
-  -webkit-appearance: none;
+    border: 1px solid black;
+    -webkit-appearance: none;
+
+/*      box-shadow: 2px 2px 2px red, -2px -2px red;*/
+
+    -moz-box-shadow: 0 0 3px 3px red;
+    -webkit-box-shadow: 0 0 3px 3px red;
+    box-shadow: 0 0 3px 3px red;
+
 }
 
 span.offair {

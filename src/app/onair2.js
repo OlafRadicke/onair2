@@ -21,6 +21,7 @@ OnAir2.prototype.getParsedTime = function (rawHtml) {
 //   console.log('BODY: ' + rawHtml);
   var minuts = null;
   var anyRow = null;
+  var statonName = null;
   var handler = new htmlparser.DefaultHandler(function(err, dom) {
     if (err) {
       sys.debug("Error: " + err);
@@ -31,39 +32,45 @@ OnAir2.prototype.getParsedTime = function (rawHtml) {
       console.log("--->rowAll.length: " + rowAll.length );
       returnMinits = 999;
       for (var i = 0; i < rowAll.length; i++) {
-        console.log("Round: " + i);
+        console.log("---> Round: " + i);
+        console.log("---> JSON.stringify(rowAll[i]): " + JSON.stringify(rowAll[i]));
 //         console.log("---> rowOdd: " + JSON.stringify(rowOdd) );
-        var statonName = rowAll[i]["children"][3]["children"][0]["data"];
+
+        try{
+            statonName = rowAll[i]["children"][3]["children"][0]["data"];
+        } catch (e) {
+            console.log("Error: " + e);
+            continue;
+        }
         statonName = statonName.replace(/\t/g, '').replace(/\n/g, '').trim()
         console.log("--->statonName: " );
         console.log( statonName );
         if ( statonName.search("Ostbahnhof") > -1 || statonName.search("Hbf") > -1 ) {
-          console.log( "### INNENSTADT ###" );
-          minuts = rowAll[0]["children"][5]["children"][0]["data"];
-          console.log("---> minuten: " );
-          console.log( minuts );
-          minuts = minuts - 7;
-          console.log( "### UMGERECHNET ###" );
-          console.log( "minuts: " + minuts );
-          console.log(  "this.nextTrainMinuts: " + this.nextTrainMinuts );
-          console.log(  "returnMinits: " + returnMinits );
-//           if ( minuts > 0 && minuts < this.nextTrainMinuts ) {
-          if ( minuts > 0 && minuts < returnMinits ) {
+            console.log( "### INNENSTADT ###" );
+            try{
+                minuts = rowAll[0]["children"][5]["children"][0]["data"];
+            } catch (e) {
+                console.log("Error: " + e);
+                continue;
+            }
+            console.log("---> minuten: " );
+            console.log( minuts );
+            minuts = minuts - 7;
+            console.log( "### UMGERECHNET ###" );
+            console.log( "minuts: " + minuts );
+            console.log(  "returnMinits: " + returnMinits );
+            if ( minuts > 0 && minuts < returnMinits ) {
               console.log( "### SPEICHERE ###" );
               console.log( "minuts: " + minuts );
-              this.nextTrainMinuts = minuts;
               returnMinits  = minuts;
-              console.log( "this.nextTrainMinuts: " + this.nextTrainMinuts );
               console.log( "returnMinits: " + returnMinits );
-          }
+            }
         }
       }
     }
   }, { verbose: false });
   var parser = new htmlparser.Parser(handler);
   parser.parseComplete(rawHtml);
-  console.log( "this.nextTrainMinuts: " + this.nextTrainMinuts );
-
 }
 
 OnAir2.prototype.getNextTrain  = function () {
@@ -136,7 +143,6 @@ OnAir2.prototype.getStatus = function (req, res) {
 //   console.log(this.lastupdate);
 //   console.log(now_checktime);
 
-  console.log( "===>> Nähster Zug: "+ this.nextTrainMinuts);
   console.log( "===>> Nähster Zug: "+ returnMinits);
 
 //   console.log("JSON.stringify(this.allstate):" + JSON.stringify(this.allstate));
