@@ -96,7 +96,7 @@ OnAir2.prototype.getStatus = function (req, res) {
   var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
   var now_checktime = new Date().getTime();
   now_checktime = now_checktime + 1000 * 61
-  var timeOut = 60;
+  var timeOut = 10;
 
 
   if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
