@@ -10,7 +10,6 @@ function OnAir2( initTimeStamp ) {
   this.statusFile = __dirname + '/models/status.json';
   var stringState = fs.readFileSync(this.statusFile,'utf8');
   this.allstate = JSON.parse(stringState);
-  this.nextTrainMinuts = 0;
 
   this.getTimeStamp = function () {
     return this.lastupdate
@@ -19,7 +18,6 @@ function OnAir2( initTimeStamp ) {
 
 
 OnAir2.prototype.getParsedTime = function (rawHtml) {
-  console.log(  "begin this.nextTrainMinuts: " + this.nextTrainMinuts );
 //   console.log('BODY: ' + rawHtml);
   var minuts = null;
   var anyRow = null;

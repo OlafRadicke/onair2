@@ -32,11 +32,11 @@ html
                     span( class='onair' ) ON AIR
                   else
                     span( class='offair' ) ON AIR
-                div(class="span2") #{person.name} [-#{person.number}]
+                div(class="span2")
+                    span#person_nummer #{person.name} [-#{person.number}]
 
   if ( nexttrain > 18 )
-    div#no_sbahn
-        Der nächste Zug fährt erst in #{nexttrain} Min.
+    div#no_sbahn Der nächste Zug von Unterschleißheim fährt erst in #{nexttrain} Min.
   else
-    div#sbahn Der nächste Zug fährt in #{nexttrain} Min.
+    div#sbahn Der nächste Zug von Unterschleißheim fährt in #{nexttrain} Min.
 

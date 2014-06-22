@@ -8,13 +8,13 @@ body {
 div#title_image {
   align:center;
   text-align: center;
+  margin:0px;
 
   background-image:url(../images/atix.png);
-  margin:0px;
 /*   padding:100px 0px 0px 100px; */
   background-repeat:no-repeat;
   background-position: center;
-  height: 90;
+  height: 90px;
 }
 
 span#title_string{
@@ -27,8 +27,8 @@ span#title_string{
   font-size: 120%;
   background-color:red;
   color:white;
-  text-shadow:2px 2px 2px  white;
-  text-shadow: 0px 0px 10px white, -1px -1px white;
+/*  text-shadow:2px 2px 2px  white;
+  text-shadow: 0px 0px 10px white, -1px -1px white;*/
 
   width: 200px;
 
@@ -132,11 +132,17 @@ span.offair {
   -webkit-appearance: none;
 }
 
+span#person_nummer {
+  font-weight: bold;
+  font-size: 120%;
+}
+
 div#sbahn {
   background-color: #00264d;
   color: white;
   font-weight: bold;
   font-size: 200%;
+  line-height: 150%;
   align:center;
   text-align:center;
   padding:10px;
@@ -152,6 +158,7 @@ div#no_sbahn {
   text-decoration: blink;
   font-weight: bold;
   font-size: 200%;
+  line-height: 150%;
   align:center;
   text-align:center;
   padding:10px;
@@ -161,3 +168,56 @@ div#no_sbahn {
   border-radius: 3px;
 }
 
+div#center_form {
+  align:center;
+  text-align: center;
+}
+
+button.speichern {
+    color:#00264d;
+    background-color: #fe9e02;
+    font-size: 120%;
+
+    margin: 5px;
+    padding:5px;
+/*    color:#fe9e02;
+    background-color: #00264d;*/
+
+    border: 1px;
+    border-style:solid;
+    border-color: #00264d;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+textarea {
+    width: 30%;
+    margin-right:auto;
+    height: 70%;
+    margin: 10px;
+    padding:10px;
+
+    border: 1px solid black;
+    border-color: #00264d;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+div#feedback_box {
+    color:#00264d;
+    background-color: #fe9e02;
+
+    width: 30%;
+    margin-right:auto;
+    margin-left: auto;
+    padding:10px;
+
+    border: 1px;
+    border-style:solid;
+    border-color: #00264d;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}

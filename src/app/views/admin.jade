@@ -1,0 +1,27 @@
+doctype html(lang="de")
+
+html
+  head
+    title Status
+    //- script(src="/js/jquery-1.11.1.js")
+
+    link(rel='stylesheet', type="text/css", href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', type="text/css", href='/bootstrap/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', type="text/css", href='/stylesheets/style.css')
+    script(src='/bootstrap/js/bootstrap.min.js')
+
+  body
+    div#title_image
+        span#title_string OnAir2
+    div#center_form
+        h2 Mitarbeiterbatenbank
+        if ( infoText !=  "" )
+            div#feedback_box  #{infoText}
+        div(class="row")
+            form(method="post")
+                textarea(name="newstatus") #{jsonDB}
+                br
+                button(id="speichern" name="speichern" type="submit").speichern Speichern
+
+
+

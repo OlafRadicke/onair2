@@ -8,6 +8,7 @@
         "websocket": ">=1.0.x",
         "socket.io": "1.0.x",
         "exec-sync": "0.1.x",
-        "htmlparser": "1.7.x"
+        "htmlparser": "1.7.x",
+        "body-parser": "1.4.x"
     }
 }
