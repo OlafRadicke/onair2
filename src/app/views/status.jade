@@ -22,17 +22,16 @@ html
     div#im-centered
       div(class="row")
         each room, index in allstate.room
-          div(class="span5")#innerbox
+          div(class="span4")#innerbox
             h3 #{index}
 
             each person, i in room
-              div(class="row")
-                div(class="span2")
-                  if (person.line == "ON AIR")
-                    span( class='onair' ) ON AIR
-                  else
-                    span( class='offair' ) ON AIR
-                div(class="span2")
+                div#state_item
+                    if (person.line == "ON AIR")
+                        span( class='onair' ) ON AIR
+                    else
+                        span( class='offair' ) ON AIR
+
                     span#person_nummer #{person.name} [-#{person.number}]
 
     if ( nexttrain > 18 )
@@ -42,4 +41,3 @@ html
             div#no_sbahn Der nächste Zug von Unterschleißheim fährt erst in #{nexttrain} Min.
     else
         div#sbahn Der nächste Zug von Unterschleißheim fährt in #{nexttrain} Min.
-

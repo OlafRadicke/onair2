@@ -98,12 +98,19 @@ OnAir2.prototype.getNextTrain  = function () {
 }
 
 OnAir2.prototype.getStatus = function (req, res) {
-//   var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1";
+//   var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1 | cut -d'-' -f1";
   // test
   var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
   var now_checktime = new Date().getTime();
   now_checktime = now_checktime + 1000 * 61
   var timeOut = 10;
+
+
+  if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
+      this.statusFile = __dirname + '/models/status.json';
+      var stringState = fs.readFileSync(this.statusFile,'utf8');
+      this.allstate = JSON.parse(stringState);
+  }
 
 
   if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {

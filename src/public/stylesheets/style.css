@@ -64,7 +64,7 @@ div.row {
 }
 
 
-div.span5 {
+div.span4 {
   border: 1px solid black;
 
   -webkit-border-radius: 3px;
@@ -82,11 +82,17 @@ div.span5 {
 
 }
 
+div#state_item {
+    padding:5px;
+    margin: 5px;
+
+}
+
 span.onair {
     align:center;
     text-align:center;
 
-    width: 200px;
+    width: 30%;
     padding:5px;
     margin: 5px;
 
@@ -118,7 +124,7 @@ span.offair {
   align:center;
   text-align:center;
 
-  width: 20px;
+  width: 30%;
   padding:5px;
   margin: 5px;
 
