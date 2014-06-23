@@ -106,7 +106,7 @@ OnAir2.prototype.getStatus = function (req, res) {
   var timeOut = 10;
 
 
-  if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > timeOut ) {
+  if ( Math.round(( now_checktime - this.lastupdate) / 1000 ) > 90 ) {
       this.statusFile = __dirname + '/models/status.json';
       var stringState = fs.readFileSync(this.statusFile,'utf8');
       this.allstate = JSON.parse(stringState);
