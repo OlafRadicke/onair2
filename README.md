@@ -1,70 +1,62 @@
 onair2
 ======
 
-MVV
-===
-http://www.mvg-live.de/ims/dfiStaticAuswahl.svc?haltestelle=Feldmoching+Bf.&sbahn=checked
-https://github.com/tautologistics/node-htmlparser
+INSTALLATION
+------------
 
----> rowEven:
-[
-  {
-    "type":"tag",
-    "name":"tr",
-    "attribs":
-    {
-      "class":"rowEven"
-    },
-    "children":
-      [
-        {
-          "data":"\r\n\t\t\t\t","type":"text"
-        },
-        {
-          "type":"tag",
-          "name":"td",
-          "attribs":
-          {
-            "class":"lineColumn"
-          },
-          "children":
-          [
-            {"data":"S1","type":"text"}
-          ]
-        },
-        {"data":"\t\t\t\r\n\t\t\t\t","type":"text"},
-        {
-          "type":"tag",
-          "name":"td",
-          "attribs":{"class":"stationColumn"},
-          "children":
-          [
-            {"data":"\r\n\t\t\t\t\tFreising\r\n\t\t\t\t\t","type":"text"},
-            {
-              "type":"tag",
-              "name":"span",
-              "attribs":{"class":"spacer"},
-              "children":
-              [
-                {"data":"&nbsp;","type":"text"}
-              ]
-            },
-            {"data":"\r\n\t\t\t\t","type":"text"}]},
-            {"data":"\t\t\t\t\r\n\t\t\t\t","type":"text"},
-            {
-              "type":"tag","name":"td",
-              "attribs":{"class":"inMinColumn"},
-              "children":
-              [
-                {"data":"16","type":"text"}
-              ]
-            },
-            {"data":"\r\n\t\t\t\t\r\n\t\t\t","type":"text"}
-          ]
-        }
-      ]
+UPDATE
+------
 
-["children"][1]["children"][1].["data"] = "\r\n\t\t\t\t\tFreising\r\n\t\t\t\t\t"
----> rowOdd: []
+* Die Datei ./src/app/models/status.json sichern.
+* Alle Dateien löschen.
+* Neue Version in das Verzeichnis kopieren.
+* Die gesicherte Datei nach ./src/app/models/status.json zurückkopieren.
 
-7 Min.
+KONFIGURATION
+-------------
+
+localhost:8080/admin aufrufen
+
+Beispielkonfiguration:
+> ## Beispielkonfiguration:
+>
+> {
+>   "room": {
+>     "Empfang": [
+>       {
+>         "name": "Michael",
+>         "starfacecode": "SIP/1051.tiptel286",
+>         "line": "OFF AIR",
+>         "number": "0"
+>       }
+>     ],
+>     "Technik": [
+>       {
+>         "name": "Peter",
+>         "starfacecode": "SIP/peter",
+>         "line": "OFF AIR",
+>         "number": "666"
+>       },
+>       {
+>         "name": "Thomas",
+>        "starfacecode": "SIP/1358.tiptel286",
+>        "line": "OFF AIR",
+>        "number": "333"
+>      }
+>    ],
+>    "Vertrieb": [
+>      {
+>        "name": "Sabine",
+>        "starfacecode": "SIP/Gigaset3",
+>        "line": "OFF AIR",
+>        "number": "101"
+>      },
+>      {
+>        "name": "Klaus",
+>        "starfacecode": "SIP/klaus",
+>        "line": "OFF AIR",
+>        "number": "102"
+>      }
+>    ]
+>  }
+>}

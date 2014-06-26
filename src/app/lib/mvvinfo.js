@@ -5,7 +5,7 @@ var htmlparser = require("htmlparser");
 function MVVInfo(){
 
     /* URL configuration of mvv website */
-    this.options = {
+    var options = {
         host: 'www.mvg-live.de',
         port: 80,
         path: '/ims/dfiStaticAuswahl.svc?haltestelle=Feldmoching+Bf.&sbahn=checkedm'
@@ -15,17 +15,16 @@ function MVVInfo(){
     var returnMinits = 999;
     this.getNextTrain  = function ()
     {
-        this.siteRequest();
         return returnMinits;
     }
 
     this.siteRequest  = function ()
     {
-        console.log("JSON.stringify(this.options): " + JSON.stringify(this.options));
-        console.log("this.options.host: " + this.options.host);
+        console.log("JSON.stringify(this.options): " + JSON.stringify( options ));
+        console.log("this.options.host: " + options.host);
         http.get
         (
-            this.options, function(res)
+            options, function(res)
             {
         //     console.log("Got response: " + res.statusCode);
                 res.on
