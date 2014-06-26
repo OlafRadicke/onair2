@@ -17,7 +17,8 @@ KONFIGURATION
 
 localhost:8080/admin aufrufen
 
-Beispielkonfiguration:
+
+
 > ## Beispielkonfiguration:
 >
 > {
