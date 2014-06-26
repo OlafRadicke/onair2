@@ -34,10 +34,10 @@ html
 
                     span#person_nummer #{person.name} [-#{person.number}]
 
-    if ( nexttrain > 18 )
+    if ( nexttrain > 19 )
         if ( nexttrain == 999 )
             div#no_sbahn Es liegen keine Informationen zu Zugverkehr in Unterschleißheim vor!
         else
-            div#no_sbahn Der nächste Zug von Unterschleißheim fährt erst in #{nexttrain} Min.
+            div#late_train Der nächste Zug von Unterschleißheim fährt erst wieder in #{nexttrain} Min.
     else
         div#sbahn Der nächste Zug von Unterschleißheim fährt in #{nexttrain} Min.
