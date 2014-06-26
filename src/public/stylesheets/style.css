@@ -130,23 +130,28 @@ span.offair {
 
   font-weight: bold;
   font-size: 120%;
-/*   background-color: #970b2c; */
-  background-color: #d2a0a0;
-  color: #797979;
-  text-shadow:2px 2px 2px  black;
-  text-shadow: 0px 0px 10px black, -1px -1px black;
+/*  background-color: #d2a0a0;
+  color: #797979; */
+  background-color: white;
+  color: white;
+  text-shadow:2px 2px 2px  white;
+  text-shadow: 0px 0px 10px white, -1px -1px white;
 
   width: 200px;
 
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-
+/*
   border: 1px solid black;
   -webkit-appearance: none;
-
   box-shadow:1px 1px 1px  black;
+*/
+  border: 1px solid white;
+  -webkit-appearance: none;
+  box-shadow:1px 1px 1px  white;
 }
+
 
 span#person_nummer {
   font-weight: bold;
