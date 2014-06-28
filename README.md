@@ -1,6 +1,11 @@
 onair2
 ======
 
+BUILD
+-----
+
+make dist-rpm
+
 INSTALLATION
 ------------
 
