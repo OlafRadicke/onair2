@@ -4,9 +4,10 @@ function  StateManager(){
 
     var fs = require('fs');
     var allstates = {};
+    var varData = __dirname + '/../../var/status.json';
 
     this.readStateConfig = function (){
-        var stringState = fs.readFileSync(__dirname + '/../models/status.json','utf8');
+        var stringState = fs.readFileSync( varData, 'utf8' );
         allstates = JSON.parse(stringState);
     }
 
