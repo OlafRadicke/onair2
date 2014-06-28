@@ -1,14 +1,41 @@
 {
+    "name": "onair2",
+    "description": "A simple asterisk web interface. It's show the held telephone connections.",
+    "author": {
+        "name": "Olaf Radicke",
+        "email": "briefkasten@olaf-radicke-de"
+    },
+    "keywords": [ "asterisk", "mvv" ],
+    "version": "0.1.0",
+    "main": "index",
+    "bin": "bin/onair2",
+    "preferGlobal": true,
     "dependencies": {
         "express": ">=3.2.x",
         "body-parser": ">=1.3.x",
         "cookie-parser": ">=1.1.x",
         "cookie-session": ">=1.0.2",
         "jade": ">=0.30.x",
-        "websocket": ">=1.0.x",
-        "socket.io": "1.0.x",
         "exec-sync": "0.1.x",
         "htmlparser": "1.7.x",
         "body-parser": "1.4.x"
-    }
+    },
+    "engines": {
+        "node": ">= 0.10.28"
+    },
+    "homepage": "https://github.com/OlafRadicke/onair2",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OlafRadicke/onair2.git"
+    },
+    "bugs": {
+        "url": "https://github.com/OlafRadicke/onair2/issues"
+    },
+    "licenses": [
+        {
+            "type": "AGPL",
+            "url": "http://www.gnu.org/licenses/agpl-3.0.html"
+        }
+    ]
+
 }
