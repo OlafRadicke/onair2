@@ -9,6 +9,9 @@
     "version": "0.1.0",
     "main": "index",
     "bin": "bin/onair2",
+    "directories": {
+        "src": "./src/"
+    },
     "preferGlobal": true,
     "dependencies": {
         "express": ">=3.2.x",
