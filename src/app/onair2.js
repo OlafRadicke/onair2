@@ -24,8 +24,6 @@ function OnAir2( ) {
                 }
             }
         }
-
-        console.log( "JSON.stringify(allstates): " + JSON.stringify(allstates));
         // ########## train info #######################
         returnMinits = mvvinfo.getNextTrain();
 
@@ -33,9 +31,6 @@ function OnAir2( ) {
         res.render('status', {allstate: allstates, nexttrain: returnMinits } );
     }
 }
-
-
-
 
 var onair2 = new OnAir2( );
 module.exports = onair2;

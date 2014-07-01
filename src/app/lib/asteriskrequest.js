@@ -9,9 +9,7 @@ function AsteriskRequest(){
     this.updateList  = function ()
     {
         var activ_lines = execSync(asterisk_command);
-        console.log( "activ_lines:" + activ_lines);
         this.aktivLines = activ_lines.split("\n");
-        console.log("activ_lines_list: " + this.aktivLines);
     }
 }
 

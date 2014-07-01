@@ -7,13 +7,8 @@ adminControllers = {
         var infotext = ""
         var stringStates = null;
         var statusFile = __dirname + '/../../var/status.json';
-        console.log("statusFile: " + statusFile);
-
-
         try {
-          console.log("statusFile: " + statusFile);
           stringStates = fs.readFileSync( statusFile,'utf8');
-          console.log("stringStates: " + stringStates);
         } catch (e) {
           console.log("Can't read: " + statusFile);
         }
