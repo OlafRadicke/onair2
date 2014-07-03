@@ -26,19 +26,19 @@ html
                     h3 Telefonanlage
                     fieldset
                         label(for="asterisk_command") Bash-Kommndo:
-                        input(id="asterisk_command", type="text", name="asterisk_command", value="echo hallo")
+                        input(id="asterisk_command", type="text", name="asterisk_command", value="#{config.asterisk_command}")
                 div(class="span3")#innerbox
                     h3 Reload-Intervall
                     fieldset
                         label(for="browser_interval") Browser-Reload-Intervall (Sek.):
-                        input(id="browser_interval", type="number", name="browser_interval", value="10")
+                        input(id="browser_interval", type="number", name="browser_interval", value="#{config.browser_interval}")
                     fieldset
                         label(for="mvv_interval") MVV-Reload-Intervall (Sek.):
-                        input(id="mvv_interval", type="number", name="browser_interval", value="10")
+                        input(id="mvv_interval", type="number", name="mvv_interval", value="#{config.mvv_interval}")
                     fieldset
                         label(for="asterisk_interval") Asterisk-Reload-Intervall (Sek.):
-                        input(id="asterisk_interval", type="number", name="asterisk_interval", value="10")
-        button(id="speichern" name="speichern" type="submit").speichern Speichern
+                        input(id="asterisk_interval", type="number", name="asterisk_interval", value="#{config.asterisk_interval}")
+                button(id="speichern" name="speichern" type="submit").speichern Speichern
 
 
 
