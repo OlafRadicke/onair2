@@ -63,8 +63,15 @@ div.row {
   margin-right:auto;
 }
 
+div#mainbox{
+/*    align:center;
+    text-align:center;*/
+    width: 80%;
+    margin-right:auto;
+    margin-left: auto;
+}
 
-div.span4 {
+div#innerbox {
   border: 1px solid black;
 
   -webkit-border-radius: 3px;
@@ -243,7 +250,7 @@ button.speichern {
 }
 
 textarea {
-    width: 30%;
+    width: 80%;
     margin-right:auto;
     height: 70%;
     margin: 10px;

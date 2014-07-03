@@ -14,14 +14,31 @@ html
     div#title_image
         span#title_string OnAir2
     div#center_form
-        h2 Mitarbeiterbatenbank
+        h2 Einstellungen
         if ( infoText !=  "" )
             div#feedback_box  #{infoText}
-        div(class="row")
+        div(class="row")#mainbox
             form(method="post")
-                textarea(name="newstatus") #{jsonDB}
-                br
-                button(id="speichern" name="speichern" type="submit").speichern Speichern
+                div(class="span4")#innerbox
+                    h3 Mitarbeiterbatenbank
+                    textarea(name="newstatus") #{jsonDB}
+                div(class="span3")#innerbox
+                    h3 Telefonanlage
+                    fieldset
+                        label(for="asterisk_command") Bash-Kommndo:
+                        input(id="asterisk_command", type="text", name="asterisk_command", value="echo hallo")
+                div(class="span3")#innerbox
+                    h3 Reload-Intervall
+                    fieldset
+                        label(for="browser_interval") Browser-Reload-Intervall (Sek.):
+                        input(id="browser_interval", type="number", name="browser_interval", value="10")
+                    fieldset
+                        label(for="mvv_interval") MVV-Reload-Intervall (Sek.):
+                        input(id="mvv_interval", type="number", name="browser_interval", value="10")
+                    fieldset
+                        label(for="asterisk_interval") Asterisk-Reload-Intervall (Sek.):
+                        input(id="asterisk_interval", type="number", name="asterisk_interval", value="10")
+        button(id="speichern" name="speichern" type="submit").speichern Speichern
 
 
 
