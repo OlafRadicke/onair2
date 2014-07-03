@@ -17,28 +17,29 @@ html
         h2 Einstellungen
         if ( infoText !=  "" )
             div#feedback_box  #{infoText}
-        div(class="row")#mainbox
-            form(method="post")
-                div(class="span4")#innerbox
+        form(method="post")
+            div(class="row")#mainbox
+                div(class="span6")#innerbox
                     h3 Mitarbeiterbatenbank
                     textarea(name="newstatus") #{jsonDB}
-                div(class="span3")#innerbox
-                    h3 Telefonanlage
-                    fieldset
-                        label(for="asterisk_command") Bash-Kommndo:
-                        input(id="asterisk_command", type="text", name="asterisk_command", value="#{config.asterisk_command}")
-                div(class="span3")#innerbox
-                    h3 Reload-Intervall
-                    fieldset
-                        label(for="browser_interval") Browser-Reload-Intervall (Sek.):
-                        input(id="browser_interval", type="number", name="browser_interval", value="#{config.browser_interval}")
-                    fieldset
-                        label(for="mvv_interval") MVV-Reload-Intervall (Sek.):
-                        input(id="mvv_interval", type="number", name="mvv_interval", value="#{config.mvv_interval}")
-                    fieldset
-                        label(for="asterisk_interval") Asterisk-Reload-Intervall (Sek.):
-                        input(id="asterisk_interval", type="number", name="asterisk_interval", value="#{config.asterisk_interval}")
-                button(id="speichern" name="speichern" type="submit").speichern Speichern
+                div(class="span5")
+                    div(class="span3")#innerbox
+                        h3 Telefonanlage
+                        fieldset
+                            label(for="asterisk_command") Bash-Kommndo:
+                            input(id="asterisk_command", type="text", name="asterisk_command", value="#{config.asterisk_command}")
+                    div(class="span3")#innerbox
+                        h3 Reload-Intervall
+                        fieldset
+                            label(for="browser_interval") Browser-Reload-Intervall (Sek.):
+                            input(id="browser_interval", type="number", name="browser_interval", value="#{config.browser_interval}")
+                        fieldset
+                            label(for="mvv_interval") MVV-Reload-Intervall (Sek.):
+                            input(id="mvv_interval", type="number", name="mvv_interval", value="#{config.mvv_interval}")
+                        fieldset
+                            label(for="asterisk_interval") Asterisk-Reload-Intervall (Sek.):
+                            input(id="asterisk_interval", type="number", name="asterisk_interval", value="#{config.asterisk_interval}")
+            button(id="speichern" name="speichern" type="submit").speichern Speichern
 
 
 
