@@ -9,7 +9,8 @@ var fs = require('fs');
 var statemanager = require('./app/manager/statemanager.js');
 
 var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');

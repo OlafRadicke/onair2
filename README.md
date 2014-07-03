@@ -1,21 +1,51 @@
 onair2
 ======
 
+ABHÄNGIGKEITEN
+--------------
+
+* [Node.js](http://nodejs.org/)
+* [NPM](https://www.npmjs.org/)
+* [Make](http://www.gnu.org/software/make/)
+
+
+GETESTET MIT
+------------
+* FEDORA 20
+
 BUILD
 -----
 
-make dist-rpm
+Rufe den Befehl
+
+    make dist
+
+auf oder
+
+    make dist-tar
+
+wenn du ein Tar-File möchtest.
+
 
 INSTALLATION
 ------------
 
+Entpacke das Tar-File; wechsel in das Verzeichnis "onair2-x" und führe den
+Befehl
+
+     make install
+
+aus.
+
 UPDATE
 ------
 
-* Die Datei ./src/app/models/status.json sichern.
-* Alle Dateien löschen.
-* Neue Version in das Verzeichnis kopieren.
-* Die gesicherte Datei nach ./src/app/models/status.json zurückkopieren.
+Tar-File entpacken und in das Verzeichnis "onair2-x" wechseln. Dort den Befehl
+
+    make update
+
+aufrufen.
+
 
 KONFIGURATION
 -------------
