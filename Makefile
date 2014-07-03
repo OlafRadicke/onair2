@@ -78,14 +78,15 @@ install:
 	cp -r js              $(prefix)/onari2/
 	cp -r public          $(prefix)/onari2/
 	# npm installs
-	cd $(prefix)/onari2/ && npm install express@3.2.x
-	cd $(prefix)/onari2/ && npm install body-parser@1.3.x
-	cd $(prefix)/onari2/ && npm install cookie-parser@1.1.x
-	cd $(prefix)/onari2/ && npm install cookie-session@1.0.2
-	cd $(prefix)/onari2/ && npm install jade@0.30.x
-	cd $(prefix)/onari2/ && npm install exec-sync@0.1.x
-	cd $(prefix)/onari2/ && npm install htmlparser@1.7.x
-	cd $(prefix)/onari2/ && npm install body-parser@1.4.x
+	npm install express@3.2.x
+	npm install body-parser@1.3.x
+	npm install cookie-parser@1.1.x
+	npm install cookie-session@1.0.2
+	npm install jade@0.30.x
+	npm install exec-sync@0.1.x
+	npm install htmlparser@1.7.x
+	npm install body-parser@1.4.x
+	mv node_modules $(prefix)/onari2/
 
 	mkdir -p $(prefix)/onari2/var/
 	[ -f $(prefix)/onari2/var/status.json ] || cp templates/status.json $(prefix)/onari2/var/status.json
@@ -108,4 +109,6 @@ create-dev-env:
 	npm install htmlparser@1.7.x
 	npm install body-parser@1.4.x
 	mv node_modules src/
+	mkdir -p src/var/
+	[ -f src/var/status.json ] || cp src/templates/status.json src/var/status.json
 
