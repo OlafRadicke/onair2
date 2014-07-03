@@ -99,12 +99,13 @@ update: uninstall install
 # create a develop environment
 create-dev-env:
 	# npm installs
-	cd src/ && npm install express@3.2.x
-	cd src/ && npm install body-parser@1.3.x
-	cd src/ && npm install cookie-parser@1.1.x
-	cd src/ && npm install cookie-session@1.0.2
-	cd src/ && npm install jade@0.30.x
-	cd src/ && npm install exec-sync@0.1.x
-	cd src/ && npm install htmlparser@1.7.x
-	cd src/ && npm install body-parser@1.4.x
+	npm install express@3.2.x
+	npm install body-parser@1.3.x
+	npm install cookie-parser@1.1.x
+	npm install cookie-session@1.0.2
+	npm install jade@0.30.x
+	npm install exec-sync@0.1.x
+	npm install htmlparser@1.7.x
+	npm install body-parser@1.4.x
+	mv node_modules src/
 
