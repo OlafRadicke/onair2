@@ -86,6 +86,7 @@ install:
 	npm install exec-sync@0.1.x
 	npm install htmlparser@1.7.x
 	npm install body-parser@1.4.x
+	npm update
 	mv node_modules $(prefix)/onari2/node_modules
 
 	mkdir -p $(prefix)/onari2/var/
@@ -108,6 +109,7 @@ create-dev-env:
 	npm install exec-sync@0.1.x
 	npm install htmlparser@1.7.x
 	npm install body-parser@1.4.x
+	npm update
 	mv node_modules src/node_modules
 	mkdir -p src/var/
 	[ -f src/var/status.json ] || cp src/templates/status.json src/var/status.json
