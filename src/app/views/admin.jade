@@ -29,6 +29,13 @@ html
                             label(for="asterisk_command") Bash-Kommndo:
                             input(id="asterisk_command", type="text", name="asterisk_command", value="#{config.asterisk_command}")
                     div(class="span3")#innerbox
+                        h3 Glückskes
+                        fieldset
+                            label(for="fortune_command") Fortune-Kommndo:
+                            input(id="fortune_command", type="text", name="fortune_command", value="#{config.fortune_command}")
+                            label(for="fortune_interval") Fortune-Intervall (Sek.):
+                            input(id="fortune_interval", type="number", name="fortune_interval", value="#{config.fortune_interval}")
+                    div(class="span3")#innerbox
                         h3 Reload-Intervall
                         fieldset
                             label(for="browser_interval") Browser-Reload-Intervall (Sek.):

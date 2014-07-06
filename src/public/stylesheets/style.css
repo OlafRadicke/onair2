@@ -185,11 +185,11 @@ div#no_sbahn {
     color: black;
     text-decoration: blink;
     font-weight: bold;
-    font-size: 200%;
+    font-size: 130%;
     line-height: 150%;
     align:center;
     text-align:center;
-    padding:10px;
+    padding:5px;
     margin: 10px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;

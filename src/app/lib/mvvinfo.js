@@ -43,7 +43,7 @@ function MVVInfo(){
     }
 
     var parsedSiteCode = function (rawHtml) {
-    //   console.log('BODY: ' + rawHtml);
+//       console.log('BODY: ' + rawHtml);
       var minuts = null;
       var anyRow = null;
       var statonName = null;
@@ -59,7 +59,6 @@ function MVVInfo(){
             try{
                 statonName = rowAll[i]["children"][3]["children"][0]["data"];
             } catch (e) {
-                console.log("Error: " + e);
                 continue;
             }
             statonName = statonName.replace(/\t/g, '').replace(/\n/g, '').trim()

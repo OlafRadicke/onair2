@@ -13,7 +13,7 @@ adminControllers = {
         // read config
         try {
             config = JSON.parse(fs.readFileSync( configFile,'utf8'));
-            console.log("JSON.stringify(config): " + JSON.stringify(config));
+//             console.log("JSON.stringify(config): " + JSON.stringify(config));
         } catch (e) {
             console.log("Can't read: " + configFile);
             infotext = "Can't read: " + configFile;
@@ -39,15 +39,19 @@ adminControllers = {
         var configFile = __dirname + '/../../var/config.json';
         var newStatus = req.body.newstatus;
         var config = {
-            "asterisk_command": "",
-            "browser_interval": "",
-            "mvv_interval": "",
-            "asterisk_interval": ""
+            "asterisk_command": "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1 | cut -d'-' -f1",
+            "browser_interval": "7",
+            "mvv_interval": "60",
+            "asterisk_interval": "10",
+            "fortune_command": "fortune -s",
+            "fortune_interval": "10"
         }
         config.asterisk_command = req.body.asterisk_command;
         config.browser_interval = req.body.browser_interval;
         config.mvv_interval = req.body.mvv_interval;
         config.asterisk_interval = req.body.asterisk_interval;
+        config.fortune_command = req.body.fortune_command;
+        config.fortune_interval = req.body.fortune_interval;
 
         // write status
         try {

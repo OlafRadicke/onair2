@@ -7,6 +7,7 @@ ABHÄNGIGKEITEN
 * [Node.js](http://nodejs.org/)
 * [NPM](https://www.npmjs.org/)
 * [Make](http://www.gnu.org/software/make/)
+* [fortune-mod](http://wiki.ubuntuusers.de/fortune)
 
 
 GETESTET MIT

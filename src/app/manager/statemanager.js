@@ -9,6 +9,7 @@ function  StateManager(){
     this.readStateConfig = function (){
         var stringState = fs.readFileSync( varData, 'utf8' );
         allstates = JSON.parse(stringState);
+        console.log("====================== readStateConfig ==========================");
     }
 
     this.getAllStates = function (){
