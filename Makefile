@@ -9,6 +9,7 @@ views=src/app/views/admin.jade \
 controls=src/app/controls/admin.js
 
 libfiles=src/app/lib/asteriskrequest.js \
+         src/app/lib/fortunerequest.js \
          src/app/lib/mvvinfo.js
 
 managers=src/app/manager/statemanager.js
@@ -30,7 +31,6 @@ clean-tar:
 dist:
 	mkdir -p                     onari2-$(version)/
 	cp src/index.js              onari2-$(version)/
-	cp -r src/js                 onari2-$(version)/
 	cp -r src/public             onari2-$(version)/
 	cp -r Makefile               onari2-$(version)/
 
