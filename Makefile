@@ -1,3 +1,4 @@
+projekt="onair2"
 version=1
 prefix=/usr/local
 
@@ -19,64 +20,64 @@ templates=src/templates/status.json
 clean-all: clean-npm clean-dist clean-tar
 
 clean-npm:
-	rm ./onari2-$(version)_npm.tgz
+	rm ./$(projekt)-$(version)_npm.tgz
 
 clean-dist:
-	rm -Rf onari2-$(version)
+	rm -Rf $(projekt)-$(version)
 
 clean-tar:
-	rm ./onari2-$(version).tar.gz onari2-$(version)/
+	rm ./$(projekt)-$(version).tar.gz $(projekt)-$(version)/
 
 
 dist:
-	mkdir -p                     onari2-$(version)/
-	cp src/index.js              onari2-$(version)/
-	cp -r src/public             onari2-$(version)/
-	cp -r Makefile               onari2-$(version)/
+	mkdir -p                     $(projekt)-$(version)/
+	cp src/index.js              $(projekt)-$(version)/
+	cp -r src/public             $(projekt)-$(version)/
+	cp -r Makefile               $(projekt)-$(version)/
 
-	mkdir -p onari2-$(version)/app
-	printf "$(appscrpts)" | xargs cp -t onari2-$(version)/app/
+	mkdir -p $(projekt)-$(version)/app
+	printf "$(appscrpts)" | xargs cp -t $(projekt)-$(version)/app/
 
-	mkdir -p onari2-$(version)/app/controls
-	printf "$(controls)" | xargs cp -t onari2-$(version)/app/controls/
+	mkdir -p $(projekt)-$(version)/app/controls
+	printf "$(controls)" | xargs cp -t $(projekt)-$(version)/app/controls/
 
-	mkdir -p onari2-$(version)/app/lib
-	printf "$(libfiles)" | xargs cp -t onari2-$(version)/app/lib/
+	mkdir -p $(projekt)-$(version)/app/lib
+	printf "$(libfiles)" | xargs cp -t $(projekt)-$(version)/app/lib/
 
-	mkdir -p onari2-$(version)/app/manager
-	printf "$(managers)" | xargs cp -t onari2-$(version)/app/manager/
+	mkdir -p $(projekt)-$(version)/app/manager
+	printf "$(managers)" | xargs cp -t $(projekt)-$(version)/app/manager/
 
-	mkdir -p onari2-$(version)/app/views
-	printf "$(views)" | xargs cp -t onari2-$(version)/app/views/
+	mkdir -p $(projekt)-$(version)/app/views
+	printf "$(views)" | xargs cp -t $(projekt)-$(version)/app/views/
 
-	mkdir -p onari2-$(version)/templates
-	printf "$(templates)" | xargs cp -t onari2-$(version)/templates/
+	mkdir -p $(projekt)-$(version)/templates
+	printf "$(templates)" | xargs cp -t $(projekt)-$(version)/templates/
 
-	mkdir -p                     onari2-$(version)/systemd
-	cp -r systemd/onair2.service onari2-$(version)/systemd/
+	mkdir -p                     $(projekt)-$(version)/systemd
+	cp -r systemd/onair2.service $(projekt)-$(version)/systemd/
 
 dist-tar: dist
-	tar -czf ./onari2-$(version).tar.gz ./onari2-$(version)/
+	tar -czf ./$(projekt)-$(version).tar.gz ./$(projekt)-$(version)/
 
 dist-npm:
-	tar -czf ./onari2-$(version)_npm.tgz ./onari2-$(version)/ ./package.json
+	tar -czf ./$(projekt)-$(version)_npm.tgz ./$(projekt)-$(version)/ ./package.json
 
 uninstall:
 	systemctl stop onair2.service
 	systemctl disable onair2.service
 	rm /usr/lib/systemd/system/onair2.service
-	rm -Rf $(prefix)/onari2/index.js
-	rm -Rf $(prefix)/onari2/app
-	rm -Rf $(prefix)/onari2/node_modules
-	rm -Rf $(prefix)/onari2/js
+	rm -Rf $(prefix)/$(projekt)/index.js
+	rm -Rf $(prefix)/$(projekt)/app
+	rm -Rf $(prefix)/$(projekt)/node_modules
+	rm -Rf $(prefix)/$(projekt)/js
 
 
 install:
-	mkdir -p $(prefix)/onari2/
-	cp -r index.js        $(prefix)/onari2/
-	cp -r app             $(prefix)/onari2/
-	cp -r js              $(prefix)/onari2/
-	cp -r public          $(prefix)/onari2/
+	mkdir -p $(prefix)/$(projekt)/
+	cp -r index.js        $(prefix)/$(projekt)/
+	cp -r app             $(prefix)/$(projekt)/
+	cp -r js              $(prefix)/$(projekt)/
+	cp -r public          $(prefix)/$(projekt)/
 	# npm installs
 	npm install express@3.2.x
 	npm install body-parser@1.3.x
@@ -87,10 +88,10 @@ install:
 	npm install htmlparser@1.7.x
 	npm install body-parser@1.4.x
 	npm update
-	mv node_modules $(prefix)/onari2/node_modules
+	mv node_modules $(prefix)/$(projekt)/node_modules
 
-	mkdir -p $(prefix)/onari2/var/
-	[ -f $(prefix)/onari2/var/status.json ] || cp templates/status.json $(prefix)/onari2/var/status.json
+	mkdir -p $(prefix)/$(projekt)/var/
+	[ -f $(prefix)/$(projekt)/var/status.json ] || cp templates/status.json $(prefix)/$(projekt)/var/status.json
 	[ -f /usr/lib/systemd/system/onair2.service ] || cp systemd/onair2.service  /usr/lib/systemd/system/
 	systemctl daemon-reload
 	systemctl start onair2.service

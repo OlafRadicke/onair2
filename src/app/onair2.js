@@ -14,24 +14,18 @@ function OnAir2( app ) {
         statemanager.readStateConfig();
     }
 
-    this.initInstance = function (req, res){
+    this.reFrashData = function (){
         // fortunerequest
         fortunerequest.updateFortune();
-        setInterval( fortunerequest.updateFortune, (1000 * 10) );
 
         // asteriskrequest
         asteriskrequest.update();
-        // Update all 10 sec.
-        setInterval( asteriskrequest.update, (1000 * 10) );
 
         // MVV-Check
         mvvinfo.siteRequest();
-        // Update all 10 sec.
-        setInterval( mvvinfo.siteRequest, (1000 * 10) );
 
         // Is the configuration file change than do a reload.
         statemanager.readStateConfig();
-        fs.watchFile('models/status.json', statemanager.readStateConfig );
     };
 
     this.getStatus  = function (req, res){

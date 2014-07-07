@@ -6,10 +6,13 @@ var fs = require('fs');
 var onair2 = new require('./app/onair2.js');
 var admin  = require('./app/controls/admin.js');
 
-onair2.initInstance();
+onair2.reFrashData();
 
 // Is the configuration file change than do a reload.
-fs.watchFile('app/models/status.json', onair2.readStateConfig );
+fs.watchFile('app/models/status.json', onair2.reFrashData );
+
+// Update all 10 sec.
+setInterval( onair2.reFrashData, (1000 * 10) );
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}))
@@ -30,8 +33,6 @@ app.use('/stylesheets', express.static(__dirname + '/public/stylesheets'));
 app.get( '/',  onair2.getStatus.bind(onair2) ) ;
 app.get( '/admin',  admin.index ) ;
 app.post( '/admin',  admin.updateStates );
-
-
 
 
 app.listen(8080);

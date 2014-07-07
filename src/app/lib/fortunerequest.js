@@ -12,7 +12,7 @@ function FortuneRequest(){
 
     this.updateFortune  = function ()
     {
-//         console.log("------- UPDATE Fortune ---------");
+        console.log("------- UPDATE Fortune ---------");
         fortuneCookie = execSync(fortune_command);
 //         console.log("this.fortuneCookie: " + fortuneCookie);
     };
