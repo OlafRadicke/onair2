@@ -1,5 +1,5 @@
 projekt="onair2"
-version=1
+version=2
 prefix=/usr/local
 
 appscrpts=src/app/onair2.js
@@ -69,14 +69,12 @@ uninstall:
 	rm -Rf $(prefix)/$(projekt)/index.js
 	rm -Rf $(prefix)/$(projekt)/app
 	rm -Rf $(prefix)/$(projekt)/node_modules
-	rm -Rf $(prefix)/$(projekt)/js
 
 
 install:
 	mkdir -p $(prefix)/$(projekt)/
 	cp -r index.js        $(prefix)/$(projekt)/
 	cp -r app             $(prefix)/$(projekt)/
-	cp -r js              $(prefix)/$(projekt)/
 	cp -r public          $(prefix)/$(projekt)/
 	# npm installs
 	npm install express@3.2.x
