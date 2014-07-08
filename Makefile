@@ -1,4 +1,4 @@
-projekt="onair2"
+projekt=onair2
 version=2
 prefix=/usr/local
 

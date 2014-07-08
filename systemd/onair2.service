@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 User=root
 Group=root
-WorkingDirectory=/usr/local/onari2/
+WorkingDirectory=/usr/local/onair2/
 ExecStart=/usr/bin/node index.js
 
 # Give a reasonable amount of time for the server to start up/shut down
