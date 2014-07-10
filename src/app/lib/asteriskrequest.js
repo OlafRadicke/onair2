@@ -3,7 +3,7 @@ var execSync = require('exec-sync');
 
 function AsteriskRequest(){
     var aktivLines = [];
-    var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1 | cut -d'-' -f1";
+//     var asterisk_command = "ssh root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1 | cut -d'-' -f1";
 //     var asterisk_command = "echo \"SIP/ingrid\nSIP/pascal\nSIP/1240\"";
 
     this.getAktivLines = function ()
@@ -13,8 +13,7 @@ function AsteriskRequest(){
 
     this.update = function ()
     {
-        console.log("------- UPDATE AsteriskRequest ---------");
-        var activ_lines = execSync(asterisk_command);
+        var activ_lines = execSync( global.config.asterisk_command) ;
         this.aktivLines = activ_lines.split("\n");
     }
 }

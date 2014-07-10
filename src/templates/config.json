@@ -1,0 +1,1 @@
+{"asterisk_command":"ssh -o ConnectTimeout=2 root@192.168.3.141 \"asterisk -vvvvvrx 'core show channels concise'\" | grep \"Up\" | grep -v \"None\" | cut -d'!' -f1 | cut -d'-' -f1","browser_interval":"15","fortune_command":"fortune -s 'linux'","cache_refresh":"5"}

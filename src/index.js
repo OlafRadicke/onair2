@@ -5,6 +5,10 @@ var app =  express();
 var fs = require('fs');
 var onair2 = new require('./app/onair2.js');
 var admin  = require('./app/controls/admin.js');
+var configmanager  = require('./app/manager/configmanager.js');
+
+global.config = configmanager.getConfig();
+
 
 onair2.reFrashData();
 
@@ -12,7 +16,7 @@ onair2.reFrashData();
 fs.watchFile('app/models/status.json', onair2.reFrashData );
 
 // Update all 10 sec.
-setInterval( onair2.reFrashData, (1000 * 10) );
+setInterval( onair2.reFrashData, (1000 * global.config.cache_refresh ) );
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}))

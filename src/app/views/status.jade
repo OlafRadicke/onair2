@@ -13,7 +13,7 @@ html
     script(type='text/javascript').
       setTimeout(function(){
          window.location.reload(1);
-      }, 9000);
+      }, (#{refrashinterval} * 1000));
 
   body
     div#title_image

@@ -1,19 +1,41 @@
 
-var execSync = require('exec-sync');
+var fs = require('fs');
 
-function FortuneRequest(){
-// var singleton = function singleton(){
-    var fortuneCookie = "";
-//     var fortune_command = "fortune -s 'linux'";
+function ConfigManager(){
 
-    this.getCookie  = function (){
-        return fortuneCookie;
+    var configFile = __dirname + '/../../var/config.json';
+    var config = null;
+
+    this.getConfig  = function (){
+        if ( config == null ) {
+            this.loadConfig();
+        }
+        return config;
     }
 
-    this.updateFortune  = function ()
+    this.loadConfig  = function ()
     {
-        fortuneCookie = execSync( global.config.fortune_command );
-//         console.log("this.fortuneCookie: " + fortuneCookie);
+        // read config
+        try {
+            config = JSON.parse(fs.readFileSync( configFile,'utf8'));
+            console.log("------- READ CONFIG ---------");
+            console.log("JSON.stringify(config): " + JSON.stringify(config));
+        } catch (e) {
+            console.log("Can't read: " + configFile + "\n ERROR: " + e );
+            infotext = "Can't read: " + configFile;
+        }
+    };
+
+    this.writeConfig  = function ( newConfig )
+    {
+        config = newConfig;
+        // wite config...
+        try {
+            fs.writeFileSync( configFile, JSON.stringify(config), 'utf8');
+            infotext = "...Gespeichert!";
+        } catch (e) {
+            infotext = configFile + "konte nicht gespeichert werden! " + infotext;
+        }
     };
 
 //     this.instance = null;
@@ -40,7 +62,7 @@ function FortuneRequest(){
 // module.exports = global.FORTUNE_REQUEST;
 
 
-module.exports = new FortuneRequest();
+module.exports = new ConfigManager();
 
 // global.fortunerequest = new FortuneRequest();
 

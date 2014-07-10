@@ -36,7 +36,7 @@ span#title_string{
   -moz-border-radius: 3px;
   border-radius: 3px;
 
-  border: 1px solid black;
+  border: 1px solid #00264d;
   -webkit-appearance: none;
 }
 
@@ -44,8 +44,9 @@ h3 {
     margin:2px;
     padding:2px;
 
+    border: 1px solid #00264d;
     background-color: #fe9e02;
-    border: 1px solid black;
+    border: 2px solid #00264d;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -72,11 +73,11 @@ div#mainbox{
 }
 
 div#innerbox {
-  border: 1px solid black;
+    border: 1px solid #00264d;
 
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 
 /*    align: left;
   text-align:  left;
@@ -84,8 +85,13 @@ div#innerbox {
   break-inside: avoid-column;
   break-inside: avoid;*/
 
-  margin: 5px;
-  padding: 5px;
+
+    -moz-box-shadow:  2px 2px black;
+    -webkit-box-shadow:   2px 3px black;
+    box-shadow:  2px 2px black;
+
+    margin: 5px;
+    padding: 5px;
 
 }
 
@@ -116,7 +122,7 @@ span.onair {
     -moz-border-radius: 3px;
     border-radius: 3px;
 
-    border: 1px solid black;
+    border: 1px solid #00264d;
     -webkit-appearance: none;
 
 /*      box-shadow: 2px 2px 2px red, -2px -2px red;*/
@@ -150,9 +156,9 @@ span.offair {
   -moz-border-radius: 3px;
   border-radius: 3px;
 /*
-  border: 1px solid black;
+  border: 1px solid #00264d;
   -webkit-appearance: none;
-  box-shadow:1px 1px 1px  black;
+  box-shadow:1px 1px 1px  #00264d;
 */
   border: 1px solid white;
   -webkit-appearance: none;
@@ -182,7 +188,7 @@ div#sbahn {
 
 div#no_sbahn {
     background-color: #fe9e02;
-    color: black;
+    color: #00264d;
     text-decoration: blink;
     font-weight: bold;
     font-size: 130%;
@@ -217,7 +223,7 @@ div#late_train {
     text-shadow:2px 2px 2px  white;
     text-shadow: 0px 0px 10px white, -1px -1px white;
 
-    border: 1px solid black;
+    border: 1px solid #00264d;
     -webkit-appearance: none;
 
     -moz-box-shadow: 0 0 3px 3px red;
@@ -250,13 +256,24 @@ button.speichern {
 }
 
 textarea {
-    width: 80%;
+    width: 90%;
     margin-right:auto;
     height: 70%;
     margin: 10px;
     padding:10px;
 
-    border: 1px solid black;
+    border: 1px solid #00264d;
+    border-color: #00264d;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+input {
+    width: 90%;
+    margin-right:auto;
+
+    border: 1px solid #00264d;
     border-color: #00264d;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;

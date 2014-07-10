@@ -13,9 +13,11 @@ libfiles=src/app/lib/asteriskrequest.js \
          src/app/lib/fortunerequest.js \
          src/app/lib/mvvinfo.js
 
-managers=src/app/manager/statemanager.js
+managers=src/app/manager/statemanager.js \
+         src/app/manager/configmanager.js
 
-templates=src/templates/status.json
+templates=src/templates/status.json \
+          src/templates/config.json
 
 clean-all: clean-npm clean-dist clean-tar
 
@@ -90,6 +92,7 @@ install:
 
 	mkdir -p $(prefix)/$(projekt)/var/
 	[ -f $(prefix)/$(projekt)/var/status.json ] || cp templates/status.json $(prefix)/$(projekt)/var/status.json
+	[ -f $(prefix)/$(projekt)/var/config.json ] || cp templates/config.json $(prefix)/$(projekt)/var/config.json
 	[ -f /usr/lib/systemd/system/onair2.service ] || cp systemd/onair2.service  /usr/lib/systemd/system/
 	systemctl daemon-reload
 	systemctl start onair2.service

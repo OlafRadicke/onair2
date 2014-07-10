@@ -20,7 +20,6 @@ function MVVInfo(){
 
     this.siteRequest  = function ()
     {
-        console.log("------- UPDATE MVVInfo ---------");
         http.get
         (
             options, function(res)

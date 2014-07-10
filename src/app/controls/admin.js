@@ -48,10 +48,8 @@ adminControllers = {
         }
         config.asterisk_command = req.body.asterisk_command;
         config.browser_interval = req.body.browser_interval;
-        config.mvv_interval = req.body.mvv_interval;
-        config.asterisk_interval = req.body.asterisk_interval;
+        config.cache_refresh = req.body.cache_refresh;
         config.fortune_command = req.body.fortune_command;
-        config.fortune_interval = req.body.fortune_interval;
 
         // write status
         try {

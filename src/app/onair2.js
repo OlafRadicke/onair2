@@ -61,7 +61,8 @@ function OnAir2( app ) {
             {
                 allstate: allstates,
                 nexttrain: returnMinits,
-                fortuneCookie: cookieText
+                fortuneCookie: cookieText,
+                refrashinterval: global.config.browser_interval
             }
         );
     }
