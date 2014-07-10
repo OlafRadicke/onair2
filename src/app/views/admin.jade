@@ -42,6 +42,11 @@ html
                             label(for="cache_refresh") Server-Refresh-Intervall (Sek.):
                             input(id="cache_refresh", type="number", name="cache_refresh", value="#{config.cache_refresh}")
             button(id="speichern" name="speichern" type="submit").speichern Speichern
+        h2 Status
+            div(class="row")#mainbox
+                div(class="span6")#innerbox
+                    h3 Daten der Telefonanlage
+                        #{aktivlines}
 
 
 

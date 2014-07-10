@@ -10,6 +10,8 @@ adminControllers = {
         var config = null;
         var statusFile = __dirname + '/../../var/status.json';
         var configFile = __dirname + '/../../var/config.json';
+        var asteriskrequest = require('../lib/asteriskrequest.js');
+
         // read config
         try {
             config = JSON.parse(fs.readFileSync( configFile,'utf8'));
@@ -70,7 +72,8 @@ adminControllers = {
         res.render('admin', {
           jsonDB: newStatus,
           infoText: infotext,
-          config: config
+          config: config,
+          aktivlines: asteriskrequest.getAktivLines()
         });
     }
 };
