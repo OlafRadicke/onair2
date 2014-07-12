@@ -20,16 +20,8 @@ managers=src/app/manager/statemanager.js \
 templates=src/templates/status.json \
           src/templates/config.json
 
-all: build-gyp
+all:
 
-configure-gyp:
-	cd src/cpp/multiinterval && node-gyp help configure
-
-build-gyp: configure-gyp
-	cd src/cpp/multiinterval && node-gyp build
-
-clean-gyp:
-	cd src/cpp/multiinterval && node-gyp clean
 
 clean-all: clean-npm clean-dist clean-tar clean-gyp
 
@@ -43,7 +35,7 @@ clean-tar:
 	rm ./$(projekt)-$(version).tar.gz $(projekt)-$(version)/
 
 
-dist: build-gyp
+dist:
 	mkdir -p                     $(projekt)-$(version)/
 	cp src/index.js              $(projekt)-$(version)/
 	cp -r src/public             $(projekt)-$(version)/
@@ -91,16 +83,6 @@ install: npm-download
 	cp -r index.js        $(prefix)/$(projekt)/
 	cp -r app             $(prefix)/$(projekt)/
 	cp -r public          $(prefix)/$(projekt)/
-	# npm installs
-# 	npm install express@3.2.x
-# 	npm install cookie-parser@1.1.x
-# 	npm install cookie-session@1.0.2
-# 	npm install jade@0.30.x
-# 	npm install exec-sync@0.1.x
-# 	npm install htmlparser@1.7.x
-# 	npm install body-parser@1.4.x
-# 	npm update
-
 #	mv node_modules $(prefix)/$(projekt)/node_modules
 	[ -d "node_modules" ] && cp -a node_modules $(prefix)/$(projekt)/
 # 	[ -d "node_modules" ] && print "Kein node_modules Verzeichnis gefunden".
