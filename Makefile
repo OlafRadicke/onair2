@@ -1,5 +1,5 @@
 projekt=onair2
-version=2
+version=3
 prefix=/usr/local
 
 appscrpts=src/app/onair2.js
@@ -11,7 +11,8 @@ controls=src/app/controls/admin.js
 
 libfiles=src/app/lib/asteriskrequest.js \
          src/app/lib/fortunerequest.js \
-         src/app/lib/mvvinfo.js
+         src/app/lib/mvvinfo.js \
+         src/cpp/multiinterval/build/Release/multiinterval.node
 
 managers=src/app/manager/statemanager.js \
          src/app/manager/configmanager.js
@@ -19,7 +20,18 @@ managers=src/app/manager/statemanager.js \
 templates=src/templates/status.json \
           src/templates/config.json
 
-clean-all: clean-npm clean-dist clean-tar
+all: build-gyp
+
+configure-gyp:
+	cd src/cpp/multiinterval && node-gyp help configure
+
+build-gyp: configure-gyp
+	cd src/cpp/multiinterval && node-gyp build
+
+clean-gyp:
+	cd src/cpp/multiinterval && node-gyp clean
+
+clean-all: clean-npm clean-dist clean-tar clean-gyp
 
 clean-npm:
 	rm ./$(projekt)-$(version)_npm.tgz
@@ -31,11 +43,12 @@ clean-tar:
 	rm ./$(projekt)-$(version).tar.gz $(projekt)-$(version)/
 
 
-dist:
+dist: build-gyp
 	mkdir -p                     $(projekt)-$(version)/
 	cp src/index.js              $(projekt)-$(version)/
 	cp -r src/public             $(projekt)-$(version)/
 	cp -r Makefile               $(projekt)-$(version)/
+	cp -r node_modules           $(projekt)-$(version)/
 
 	mkdir -p $(projekt)-$(version)/app
 	printf "$(appscrpts)" | xargs cp -t $(projekt)-$(version)/app/
@@ -67,28 +80,30 @@ dist-npm:
 uninstall:
 	systemctl stop onair2.service
 	systemctl disable onair2.service
-	rm /usr/lib/systemd/system/onair2.service
+	rm -f /usr/lib/systemd/system/onair2.service
 	rm -Rf $(prefix)/$(projekt)/index.js
 	rm -Rf $(prefix)/$(projekt)/app
 	rm -Rf $(prefix)/$(projekt)/node_modules
 
 
-install:
+install: npm-download
 	mkdir -p $(prefix)/$(projekt)/
 	cp -r index.js        $(prefix)/$(projekt)/
 	cp -r app             $(prefix)/$(projekt)/
 	cp -r public          $(prefix)/$(projekt)/
 	# npm installs
-	npm install express@3.2.x
-	npm install body-parser@1.3.x
-	npm install cookie-parser@1.1.x
-	npm install cookie-session@1.0.2
-	npm install jade@0.30.x
-	npm install exec-sync@0.1.x
-	npm install htmlparser@1.7.x
-	npm install body-parser@1.4.x
-	npm update
-	mv node_modules $(prefix)/$(projekt)/node_modules
+# 	npm install express@3.2.x
+# 	npm install cookie-parser@1.1.x
+# 	npm install cookie-session@1.0.2
+# 	npm install jade@0.30.x
+# 	npm install exec-sync@0.1.x
+# 	npm install htmlparser@1.7.x
+# 	npm install body-parser@1.4.x
+# 	npm update
+
+#	mv node_modules $(prefix)/$(projekt)/node_modules
+	[ -d "node_modules" ] && cp -a node_modules $(prefix)/$(projekt)/
+# 	[ -d "node_modules" ] && print "Kein node_modules Verzeichnis gefunden".
 
 	mkdir -p $(prefix)/$(projekt)/var/
 	[ -f $(prefix)/$(projekt)/var/status.json ] || cp templates/status.json $(prefix)/$(projekt)/var/status.json
@@ -100,8 +115,7 @@ install:
 
 update: uninstall install
 
-# create a develop environment
-create-dev-env:
+npm-download:
 	# npm installs
 	npm install express@3.2.x
 	npm install body-parser@1.3.x
@@ -112,7 +126,3 @@ create-dev-env:
 	npm install htmlparser@1.7.x
 	npm install body-parser@1.4.x
 	npm update
-	mv node_modules src/node_modules
-	mkdir -p src/var/
-	[ -f src/var/status.json ] || cp src/templates/status.json src/var/status.json
-
